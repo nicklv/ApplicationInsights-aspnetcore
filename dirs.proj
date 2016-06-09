@@ -4,6 +4,12 @@
         <!--<Solution Include="ApplicationInsights.AspNetCore.sln" />-->
         <Solution Include="src\Microsoft.ApplicationInsights.AspNetCore\Microsoft.ApplicationInsights.AspNetCore.xproj" />
     </ItemGroup>
+    <ItemGroup>
+        <FilesToSign Include="$(UnpackedPackagesFolder)**\*.dll">
+            <Authenticode Condition="'%(FilesToSign.Authenticode)' == ''">Microsoft</Authenticode>
+            <StrongName Condition="'%(FilesToSign.StrongName)' == ''">MsSharedLib72</StrongName>
+        </FilesToSign>
+    </ItemGroup>
     <Target Name="Build">
         <!--<Exec Command='"C:\Program Files\dotnet\dotnet.exe" restore' ContinueOnError="ErrorAndStop" />-->
         <Exec Command='"C:\Program Files\dotnet\dotnet.exe" restore .\src\Microsoft.ApplicationInsights.AspNetCore\project.json' ContinueOnError="ErrorAndStop" />
